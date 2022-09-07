@@ -12,14 +12,15 @@ char const* const VERSIONSNR = "0.1.2";
 
 int const DB_SIZE = 20;
 
-struct person
+struct mensch
 {
-    int  personalnummer;
+    struct mensch* elternteil;
+    struct mensch* kind;
     char nachname[20];
     char vorname[20];
     int  geburtsjahr;
 };
-typedef struct person person_t;
+typedef struct mensch mensch_dt;
 
 void readcsv(char const* const datei)
 {
@@ -32,20 +33,22 @@ void readcsv(char const* const datei)
         fprintf(stderr, "Couldnt open file '%s'\n", datei);
         exit(2);
     }
-    person_t database[DB_SIZE];
+    mensch_dt database[DB_SIZE];
     while(fscanf(filepointer,
-                 "%d,%[^,],%[^,],%d",
-                 &database[zaehler].personalnummer,
+                 "%[^,],%[^,],%[^,],%[^,],%d",
+                 database[zaehler].elternteil->vorname,
+                 database[zaehler].kind->vorname,
                  database[zaehler].nachname,
-                 database[zaehler].vorname,
+		 database[zaehler].vorname,
                  &database[zaehler].geburtsjahr)
           != EOF)
     {
-        printf("%d, %s, %s, %d \n",
-               database[zaehler].personalnummer,
-               database[zaehler].nachname,
-               database[zaehler].vorname,
-               database[zaehler].geburtsjahr);
+        printf("%s, %s, %s, %s, %d \n",
+	       database[zaehler].elternteil->vorname,
+	       database[zaehler].kind->vorname,
+	       database[zaehler].nachname,
+	       database[zaehler].vorname,
+	       database[zaehler].geburtsjahr);
         zaehler++;
         if(zaehler == DB_SIZE)
         {
