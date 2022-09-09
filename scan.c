@@ -35,6 +35,17 @@ void readcsv(char const* const datei)
         exit(2);
     }
     mensch_dt database[DB_SIZE];
+    for(size_t i = 0; i < DB_SIZE; i++)
+    {
+	    database[i].elternteil = (mensch_dt*)malloc(i * sizeof(mensch_dt));
+	    database[i].kind = (mensch_dt*)malloc(i * sizeof(mensch_dt));
+	    
+    }
+
+//	 database[1].elternteil = (mensch_dt*)malloc(1* sizeof(mensch_dt));
+
+
+
     while(fscanf(filepointer,
                  "%[^,],%[^,],%[^,],%[^,],%d",
                  database[zaehler].elternteil->vorname,
