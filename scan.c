@@ -14,12 +14,13 @@ int const DB_SIZE = 20;
 
 struct mensch
 {
-    struct mensch* elternteil;
-    struct mensch* kind;
+    struct mensch *elternteil;
+    struct mensch *kind;
     char nachname[20];
     char vorname[20];
     int  geburtsjahr;
 };
+
 typedef struct mensch mensch_dt;
 
 void readcsv(char const* const datei)
@@ -39,16 +40,16 @@ void readcsv(char const* const datei)
                  database[zaehler].elternteil->vorname,
                  database[zaehler].kind->vorname,
                  database[zaehler].nachname,
-		 database[zaehler].vorname,
+                 database[zaehler].vorname,
                  &database[zaehler].geburtsjahr)
-          != EOF)
+            != EOF)
     {
         printf("%s, %s, %s, %s, %d \n",
-	       database[zaehler].elternteil->vorname,
-	       database[zaehler].kind->vorname,
-	       database[zaehler].nachname,
-	       database[zaehler].vorname,
-	       database[zaehler].geburtsjahr);
+               database[zaehler].elternteil->vorname,
+               database[zaehler].kind->vorname,
+               database[zaehler].nachname,
+               database[zaehler].vorname,
+               database[zaehler].geburtsjahr);
         zaehler++;
         if(zaehler == DB_SIZE)
         {
